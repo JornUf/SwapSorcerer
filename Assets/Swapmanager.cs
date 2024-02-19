@@ -7,7 +7,7 @@ public class Swapmanager : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
 
-    private SwapStats[] allSwapables;
+    [SerializeField] private SwapStats[] allSwapables;
     // Start is called before the first frame update
     void Start()
     {

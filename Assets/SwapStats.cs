@@ -22,7 +22,7 @@ public class SwapStats : MonoBehaviour
     {
         
     }
-    
+
     public class FloatRef
     {
         public float Value { get; set; }
