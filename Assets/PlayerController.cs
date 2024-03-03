@@ -79,21 +79,17 @@ public class PlayerController : MonoBehaviour
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetKeyUp(KeyCode.Q))
         {
-            swapMode = !swapMode;
-            canMove = !swapMode;
-            if (swapMode)
-            {
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
-            }
-            else
-            {
-                highLightReset();
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
+            swapMode = true;
+            canMove = false;
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+
+        if (!canMove && Input.GetKeyUp(KeyCode.E))
+        {
+            backtogame();
         }
 
         if (swapMode)
@@ -102,6 +98,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void backtogame()
+    {
+        swapMode = false;
+        canMove = true;
+        highLightReset();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
     void highLightReset()
     {
         if (highlight)
@@ -113,6 +117,7 @@ public class PlayerController : MonoBehaviour
         if (selection)
         {
             selection.GetComponent<MeshRenderer>().material = originalMaterialSelection;
+            selection.GetComponent<SwapStats>().unselected();
             selection = null;
         }
 
@@ -129,7 +134,6 @@ public class PlayerController : MonoBehaviour
         if (!EventSystem.current.IsPointerOverGameObject() && Physics.Raycast(ray, out raycastHit)) //Make sure you have EventSystem in the hierarchy before using EventSystem
         {
             highlight = raycastHit.transform;
-            print(highlight.gameObject.name);
             if (highlight.gameObject.GetComponent<SwapStats>())
             {
                 if (highlight.gameObject.GetComponent<SwapStats>().SwapStat && highlight != selection)
@@ -152,13 +156,14 @@ public class PlayerController : MonoBehaviour
         }
 
         // Selection
-        if (Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             if (highlight)
             {
                 if (selection != null)
                 {
                     selection.GetComponent<MeshRenderer>().material = originalMaterialSelection;
+                    selection.GetComponent<SwapStats>().unselected();
                 }
                 selection = raycastHit.transform;
                 if (selection.GetComponent<MeshRenderer>().material != selectionMaterial)
@@ -167,12 +172,14 @@ public class PlayerController : MonoBehaviour
                     selection.GetComponent<MeshRenderer>().material = selectionMaterial;
                 }
                 highlight = null;
+                selection.GetComponent<SwapStats>().gotSelected();
             }
             else
             {
                 if (selection)
                 {
                     selection.GetComponent<MeshRenderer>().material = originalMaterialSelection;
+                    selection.GetComponent<SwapStats>().unselected();
                     selection = null;
                 }
             }
