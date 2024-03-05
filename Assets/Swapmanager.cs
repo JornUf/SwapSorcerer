@@ -13,7 +13,11 @@ public class Swapmanager : MonoBehaviour
     [SerializeField]
     private PlayerController _playerController;
 
+    [SerializeField] private GameObject button;
+
     [SerializeField] private TextMeshProUGUI currentselection;
+
+    [SerializeField] private GameObject particles;
 
     private SwapStats.FloatRef nr1;
     // Start is called before the first frame update
@@ -24,6 +28,21 @@ public class Swapmanager : MonoBehaviour
         foreach (var swaps in allSwapables)
         {
             swaps.swapmanager = this;
+            swaps.confirmbutton = button;
+            var tempparticles = Instantiate(particles);
+            tempparticles.transform.position = swaps.gameObject.transform.position;
+            tempparticles.transform.parent = swaps.gameObject.transform;
+        }
+    }
+
+    public void ButtonPressed()
+    {
+        foreach (var swaps in allSwapables)
+        {
+            if (swaps.isSelected)
+            {
+                swaps.ConfirmButton();
+            }
         }
     }
 

@@ -5,64 +5,72 @@ using UnityEditor.Events;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SwapStats : MonoBehaviour
-{
-    public TMP_Dropdown dropDown;
-    
-    public bool SwapPos = false;
-
-    public bool SwapStat = false;
-
-    public Swapmanager swapmanager;
-    
-    internal List<FloatRef> floatList = new List<FloatRef>();
-    
-
-    // Start is called before the first frame update
-    void Start()
+    public class SwapStats : MonoBehaviour
     {
-        dropDown = FindObjectOfType<TMP_Dropdown>();
-        swapmanager = FindObjectOfType<Swapmanager>();
-    }
+        public TMP_Dropdown dropDown;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        public bool SwapPos = false;
 
-    public void gotSelected()
-    {
-        dropDown.gameObject.SetActive(true);
-        dropDown.onValueChanged.AddListener(valueChanged);
-        
-        List<TMP_Dropdown.OptionData> optionslist = new List<TMP_Dropdown.OptionData>();
+        public bool SwapStat = false;
 
-        foreach (FloatRef option in floatList)
+        public Swapmanager swapmanager;
+
+        internal List<FloatRef> floatList = new List<FloatRef>();
+
+        public bool isSelected = false;
+
+        public GameObject confirmbutton;
+
+
+        // Start is called before the first frame update
+        void Start()
         {
-            TMP_Dropdown.OptionData optdata = new TMP_Dropdown.OptionData(option.Name + ": " + option.Value);
-            optionslist.Add(optdata);
+            dropDown = FindObjectOfType<TMP_Dropdown>();
+            swapmanager = FindObjectOfType<Swapmanager>();
         }
 
-        dropDown.options = optionslist;
-    }
+        // Update is called once per frame
+        void Update()
+        {
 
-    public void unselected()
-    {
-        dropDown.ClearOptions();
-        dropDown.onValueChanged.RemoveAllListeners();
-        dropDown.gameObject.SetActive(false);
-    }
+        }
 
-    public void valueChanged(int index)
-    {
-        swapmanager.valueChosen(floatList[index]);
-    }
+        public void gotSelected()
+        {
+            isSelected = true;
+            dropDown.gameObject.SetActive(true);
+            confirmbutton.SetActive(true);
+            //dropDown.onValueChanged.AddListener(valueChanged);
 
-    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Floatref", order = 1)]
-    public class FloatRef : ScriptableObject
-    {
-        public float Value;
-        public string Name;
+            List<TMP_Dropdown.OptionData> optionslist = new List<TMP_Dropdown.OptionData>();
+
+            foreach (FloatRef option in floatList)
+            {
+                TMP_Dropdown.OptionData optdata = new TMP_Dropdown.OptionData(option.Name + ": " + option.Value);
+                optionslist.Add(optdata);
+            }
+
+            dropDown.options = optionslist;
+        }
+
+        public void unselected()
+        {
+            isSelected = false;
+            dropDown.ClearOptions();
+            //dropDown.onValueChanged.RemoveAllListeners();
+            dropDown.gameObject.SetActive(false);
+            confirmbutton.SetActive(false);
+        }
+
+        public void ConfirmButton()
+        {
+            swapmanager.valueChosen(floatList[dropDown.value]);
+        }
+
+        [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Floatref", order = 1)]
+        public class FloatRef : ScriptableObject
+        {
+            public float Value;
+            public string Name;
+        }
     }
-}
