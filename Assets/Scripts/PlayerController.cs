@@ -18,6 +18,10 @@ using UnityEngine.EventSystems;
 
 
         [SerializeField] private SwapStatsPlayer _statsPlayer;
+
+        [SerializeField]
+        private GameObject futureHUD;
+        
         public Camera playerCamera;
         public float lookSpeed = 2.0f;
         public float lookXLimit = 45.0f;
@@ -89,6 +93,7 @@ using UnityEngine.EventSystems;
                 canMove = false;
                 Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = true;
+                futureHUD.SetActive(true);
             }
 
             if (!canMove && Input.GetKeyUp(KeyCode.E))
@@ -109,6 +114,7 @@ using UnityEngine.EventSystems;
             highLightReset();
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            futureHUD.SetActive(false);
         }
 
         void highLightReset()

@@ -13,6 +13,8 @@ public class Button : MonoBehaviour
     private bool isPressed = false;
 
     private Vector3 startPos;
+
+    [SerializeField] public bool vertical = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,8 +30,13 @@ public class Button : MonoBehaviour
     {
         if (!isPressed)
         {
+            print("A");
             isPressed = true;
-            transform.position = new Vector3(startPos.x, startPos.y - 0.1f, startPos.z);
+            if (!vertical)
+            {
+                transform.position = new Vector3(startPos.x, startPos.y - 0.1f, startPos.z);
+            }
+
             down.Invoke();
         }
     }
@@ -38,8 +45,13 @@ public class Button : MonoBehaviour
     {
         if (isPressed)
         {
+            print("B");
             isPressed = false;
-            transform.position = startPos;
+            if (!vertical)
+            {
+                transform.position = startPos;
+            }
+
             up.Invoke();
         }
     }

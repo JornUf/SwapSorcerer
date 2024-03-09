@@ -17,6 +17,7 @@ public class Swapmanager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI currentselection;
 
+
     [SerializeField] private GameObject particles;
 
     private SwapStats.FloatRef nr1;
