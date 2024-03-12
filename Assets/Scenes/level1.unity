@@ -359,6 +359,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  vertical: 0
 --- !u!136 &130929769
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -526,11 +527,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 42313437}
   m_SourcePrefab: {fileID: 100100000, guid: 871b8d729459c824f8bb5ed0200b5551, type: 3}
---- !u!4 &150082033 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1115082402345434102, guid: ecea7dc2378294142a29a4c9ca838308, type: 3}
-  m_PrefabInstance: {fileID: 6230240601186913340}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &297611360
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2351,10 +2347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 1115082402345434102, guid: ecea7dc2378294142a29a4c9ca838308, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7254739598211772468}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecea7dc2378294142a29a4c9ca838308, type: 3}
 --- !u!4 &7254739598211772468
@@ -2365,12 +2358,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4582011544803363269}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.25881916, y: 0.00000020861626, z: -0, w: 0.9659258}
-  m_LocalPosition: {x: 0.14142418, y: 16.699999, z: -32.64005}
+  m_LocalRotation: {x: 0.23911774, y: -0.36964363, z: 0.099045806, w: 0.8923992}
+  m_LocalPosition: {x: 23.180002, y: 24.9, z: -21.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 150082033}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 30, y: -45, z: 0}
 --- !u!1001 &7325783848491795285
 PrefabInstance:
@@ -2655,7 +2648,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2689,3 +2682,4 @@ SceneRoots:
   - {fileID: 802737397}
   - {fileID: 297611360}
   - {fileID: 1117873518}
+  - {fileID: 7254739598211772468}
