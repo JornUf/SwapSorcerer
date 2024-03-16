@@ -7,7 +7,7 @@ public class EndPoint : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Cheese")
         {
             print("Yippie!");
         }

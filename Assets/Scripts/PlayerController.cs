@@ -10,6 +10,8 @@ using UnityEngine.EventSystems;
         public Material highlightMaterial;
         public Material selectionMaterial;
 
+        public bool weirdrotation = false;
+
         private Material originalMaterialHighlight;
         private Material originalMaterialSelection;
         private Transform highlight;
@@ -21,90 +23,100 @@ using UnityEngine.EventSystems;
 
         [SerializeField]
         private GameObject futureHUD;
-        
-        public Camera playerCamera;
-        public float lookSpeed = 2.0f;
-        public float lookXLimit = 45.0f;
 
         CharacterController characterController;
         Vector3 moveDirection = Vector3.zero;
-        float rotationX = 0;
 
         private bool swapMode = false;
 
         [HideInInspector] public bool canMove = false;
 
+        private bool started = false;
+
         void Start()
         {
             characterController = GetComponent<CharacterController>();
-            
-            // Lock cursor
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
         }
 
         void Update()
         {
-            // We are grounded, so recalculate move direction based on axes
-            Vector3 forward = transform.TransformDirection(Vector3.forward);
-            Vector3 right = transform.TransformDirection(Vector3.right);
-            // Press Left Shift to run
-            bool isRunning = Input.GetKey(KeyCode.LeftShift);
-            float curSpeedX = canMove
-                ? (isRunning ? _statsPlayer.RunSpeed.Value : _statsPlayer.WalkSpeed.Value) * Input.GetAxis("Vertical")
-                : 0;
-            float curSpeedY = canMove
-                ? (isRunning ? _statsPlayer.RunSpeed.Value : _statsPlayer.WalkSpeed.Value) * Input.GetAxis("Horizontal")
-                : 0;
-            float movementDirectionY = moveDirection.y;
-            moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+            if (started)
+            {
+                // We are grounded, so recalculate move direction based on axes
+                Vector3 forward = (Vector3.forward + Vector3.left).normalized;
+                Vector3 right = (Vector3.right + Vector3.forward).normalized;
+                // Press Left Shift to run
+                bool isRunning = Input.GetKey(KeyCode.LeftShift);
+                float curSpeedX = canMove
+                    ? (isRunning ? _statsPlayer.RunSpeed.Value : _statsPlayer.WalkSpeed.Value) *
+                      Input.GetAxis("Vertical")
+                    : 0;
+                float curSpeedY = canMove
+                    ? (isRunning ? _statsPlayer.RunSpeed.Value : _statsPlayer.WalkSpeed.Value) *
+                      Input.GetAxis("Horizontal")
+                    : 0;
+                float movementDirectionY = moveDirection.y;
+                moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-            if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
-            {
-                moveDirection.y = _statsPlayer.JumpSpeed.Value;
-            }
-            else
-            {
-                moveDirection.y = movementDirectionY;
-            }
+                if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
+                {
+                    moveDirection.y = _statsPlayer.JumpSpeed.Value;
+                }
+                else
+                {
+                    moveDirection.y = movementDirectionY;
+                }
 
-            // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
-            // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
-            // as an acceleration (ms^-2)
-            if (!characterController.isGrounded && canMove)
-            {
-                moveDirection.y -= _statsPlayer.GravitySpeed.Value * 2 * Time.deltaTime;
-            }
+                // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
+                // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
+                // as an acceleration (ms^-2)
+                if (!characterController.isGrounded && canMove)
+                {
+                    moveDirection.y -= _statsPlayer.GravitySpeed.Value * 2 * Time.deltaTime;
+                }
 
-            // Player and Camera rotation
-            if (canMove)
-            {
-                // Move the controller
-                characterController.Move(moveDirection * Time.deltaTime);
-                rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
-                rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-                // playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-                // transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
-            }
+                // Player and Camera rotation
+                if (canMove)
+                {
+                    // Move the controller
+                    characterController.Move(moveDirection * Time.deltaTime);
+                    if (Mathf.Abs(curSpeedX) > 0 || Mathf.Abs(curSpeedY) > 0)
+                    {
+                        transform.forward = new Vector3(moveDirection.x, -90, moveDirection.z);
+                        if (weirdrotation)
+                        {
+                            //transform.rotation = transform.rotation + Quaternion.Euler(90, 0, 0);
+                        }
+                    }
+                }
 
-            if (Input.GetKeyUp(KeyCode.Q))
-            {
-                swapMode = true;
-                canMove = false;
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
-                futureHUD.SetActive(true);
-            }
+                if (Input.GetKeyUp(KeyCode.Q))
+                {
+                    swapMode = true;
+                    canMove = false;
+                    Cursor.lockState = CursorLockMode.Confined;
+                    Cursor.visible = true;
+                    futureHUD.SetActive(true);
+                }
 
-            if (!canMove && Input.GetKeyUp(KeyCode.E))
-            {
-                backtogame();
-            }
+                if (!canMove && Input.GetKeyUp(KeyCode.E))
+                {
+                    backtogame();
+                }
 
-            if (swapMode)
-            {
-                DoSwapStuff();
+                if (swapMode)
+                {
+                    DoSwapStuff();
+                }
             }
+        }
+
+        public void startgame()
+        {
+            started = true;
+            // Lock cursor
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         public void backtogame()

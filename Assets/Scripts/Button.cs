@@ -15,6 +15,8 @@ public class Button : MonoBehaviour
     private Vector3 startPos;
 
     [SerializeField] public bool vertical = false;
+
+    [SerializeField] private float neededweight = 5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,26 +28,28 @@ public class Button : MonoBehaviour
     {
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnCollisionStay(Collision other)
     {
-        if (!isPressed)
+        if (other.gameObject.GetComponent<SwapStatsCube>())
         {
-            print("A");
-            isPressed = true;
-            if (!vertical)
+            if (!isPressed && (other.gameObject.GetComponent<SwapStatsCube>().refGravity.Value >= neededweight))
             {
-                transform.position = new Vector3(startPos.x, startPos.y - 0.1f, startPos.z);
-            }
+                isPressed = true;
+                if (!vertical)
+                {
+                    transform.position = new Vector3(startPos.x, startPos.y - 1f, startPos.z);
+                }
 
-            down.Invoke();
+                down.Invoke();
+            }
         }
     }
+    
 
-    private void OnTriggerExit(Collider other)
+    private void OnCollsionExit(Collider other)
     {
         if (isPressed)
         {
-            print("B");
             isPressed = false;
             if (!vertical)
             {
