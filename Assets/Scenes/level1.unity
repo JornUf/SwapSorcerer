@@ -158,8 +158,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -719, y: -123}
-  m_SizeDelta: {x: 400, y: 400}
+  m_AnchoredPosition: {x: -729.5, y: -42.29048}
+  m_SizeDelta: {x: 421, y: 437.8303}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &15694482
 MonoBehaviour:
@@ -385,6 +385,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d75fcc5623758094fb06c8fb1ca8b310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  finished:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 375246946}
+        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
+        m_MethodName: finishdia
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &128162135 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6217358377381093507, guid: ecea7dc2378294142a29a4c9ca838308, type: 3}
@@ -678,11 +693,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - Yo, its me biggie cheese!
-  - Move with WASD
-  - later!
+  - Greeting Agent M. I am here to help!
+  - Your mission is to get the cheese.
+  - You are equiped with reality warping goggles.
+  - Press Q to use them and click on any glowing object to select it.
+  - Then you can select one of their stats to swap with another selection.
+  - You can reset the goggles with R or exit with E.
+  - You can move with WASD and jump with SPACE.
+  - Unfortunately the cube on that button is not heavy enough to open the door.
+  - Good luck agent!
   triggereddialogue:
   - Wow you cheesed that one!
+  finisheddialogue:
+  - Well done agent!
   UItext: {fileID: 729566859}
   container: {fileID: 2018079521}
   goal: {fileID: 901429142}
@@ -705,6 +728,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  speed: 2
 --- !u!4 &375246947
 Transform:
   m_ObjectHideFlags: 0
@@ -1058,10 +1082,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 69
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -1115,7 +1139,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 729566858}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1124,8 +1148,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.6054, y: 27.056}
-  m_SizeDelta: {x: 292.1059, y: 127.1388}
+  m_AnchoredPosition: {x: 11.0078, y: 22.6455}
+  m_SizeDelta: {x: 284.1214, y: 156.4731}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &738298365
 GameObject:
@@ -1637,7 +1661,7 @@ GameObject:
   - component: {fileID: 869328145}
   - component: {fileID: 869328144}
   m_Layer: 5
-  m_Name: Biggiecheese
+  m_Name: Agent R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1659,7 +1683,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -794, y: -397}
+  m_AnchoredPosition: {x: -740, y: -292}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &869328144
@@ -1682,7 +1706,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c7a860ebc5d871f4e8b1a2627719b33a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e14491972bd4ec644b328f0b5859e94d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2462,8 +2486,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.6995497, y: 0.87422395, z: 2.273147}
+  m_Center: {x: -0.047891434, y: -0.062888026, z: -0.05876589}
 --- !u!1 &1646898807
 GameObject:
   m_ObjectHideFlags: 0

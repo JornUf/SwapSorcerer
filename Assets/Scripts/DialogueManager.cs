@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
@@ -10,6 +11,8 @@ public class DialogueManager : MonoBehaviour
     public List<string> dialogue = new List<string>();
 
     public List<string> triggereddialogue = new List<string>();
+
+    public List<string> finisheddialogue = new List<string>();
 
     [SerializeField] private TextMeshProUGUI UItext;
 
@@ -36,6 +39,7 @@ public class DialogueManager : MonoBehaviour
     {
         startdialogue,
         triggereddialogue,
+        finisheddialogue,
         none
     }
     // Start is called before the first frame update
@@ -102,6 +106,21 @@ public class DialogueManager : MonoBehaviour
                     stopdialogue();
                 }
             }
+            
+            if (_currentdialogue == currentdialogue.finisheddialogue)
+            {
+                if (dialoguect < finisheddialogue.Count)
+                {
+                    dodialogue(finisheddialogue);
+
+                }
+                else
+                {
+                    Cursor.lockState = CursorLockMode.Confined;
+                    Cursor.visible = true;
+                    SceneManager.LoadScene("Main Menu");
+                }
+            }
         }
     }
 
@@ -117,6 +136,14 @@ public class DialogueManager : MonoBehaviour
         _currentdialogue = currentdialogue.triggereddialogue;
         movein = true;
         dodialogue(triggereddialogue);
+    }
+
+    public void finishdia()
+    {
+        dialoguect = 0;
+        _currentdialogue = currentdialogue.finisheddialogue;
+        movein = true;
+        dodialogue(finisheddialogue);
     }
 
     void stopdialogue()
