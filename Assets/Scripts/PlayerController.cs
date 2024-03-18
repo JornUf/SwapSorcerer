@@ -9,15 +9,14 @@ using UnityEngine.EventSystems;
     {
         public Material highlightMaterial;
         public Material selectionMaterial;
-
-        public bool weirdrotation = false;
-
+        
         private Material originalMaterialHighlight;
         private Material originalMaterialSelection;
         private Transform highlight;
         private Transform selection;
         private RaycastHit raycastHit;
 
+        [SerializeField] private bool lvl0 = false;
 
         [SerializeField] private SwapStatsPlayer _statsPlayer;
 
@@ -83,14 +82,10 @@ using UnityEngine.EventSystems;
                     if (Mathf.Abs(curSpeedX) > 0 || Mathf.Abs(curSpeedY) > 0)
                     {
                         transform.forward = new Vector3(moveDirection.x, -90, moveDirection.z);
-                        if (weirdrotation)
-                        {
-                            //transform.rotation = transform.rotation + Quaternion.Euler(90, 0, 0);
-                        }
                     }
                 }
 
-                if (Input.GetKeyUp(KeyCode.Q))
+                if (Input.GetKeyUp(KeyCode.Q) && !lvl0)
                 {
                     swapMode = true;
                     canMove = false;

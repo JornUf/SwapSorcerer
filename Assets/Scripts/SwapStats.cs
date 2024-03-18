@@ -8,9 +8,7 @@ using UnityEngine.UI;
     public class SwapStats : MonoBehaviour
     {
         public TMP_Dropdown dropDown;
-
-        public bool SwapPos = false;
-
+        
         public bool SwapStat = false;
 
         public Swapmanager swapmanager;

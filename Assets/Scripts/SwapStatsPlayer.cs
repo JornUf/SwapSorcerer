@@ -8,7 +8,7 @@ public class SwapStatsPlayer : SwapStats
     public float startRunSpeed = 8;
     public float startJumpSpeed = 11.5f;
     public float startGravitySpeed = 20f;
-    
+
     [HideInInspector]
     public FloatRef WalkSpeed;
     [HideInInspector]
@@ -17,10 +17,17 @@ public class SwapStatsPlayer : SwapStats
     public FloatRef JumpSpeed;
     [HideInInspector]
     public FloatRef GravitySpeed;
+    [HideInInspector] 
+    public FloatRef ScaleRef;
     
     // Start is called before the first frame update
     void Start()
     {
+        ScaleRef = ScriptableObject.CreateInstance<FloatRef>();
+        ScaleRef.Name = "Size";
+        ScaleRef.Value = transform.localScale.x;
+        floatList.Add(ScaleRef);
+        
         WalkSpeed = ScriptableObject.CreateInstance<FloatRef>();
         WalkSpeed.Name = "WalkSpeed";
         WalkSpeed.Value = startWalkSpeed;
@@ -32,12 +39,12 @@ public class SwapStatsPlayer : SwapStats
         floatList.Add(RunSpeed);
         
         JumpSpeed = ScriptableObject.CreateInstance<FloatRef>();
-        JumpSpeed.Name = "JumpSpeed";
+        JumpSpeed.Name = "JumpHeight";
         JumpSpeed.Value = startJumpSpeed;
         floatList.Add(JumpSpeed);
         
         GravitySpeed = ScriptableObject.CreateInstance<FloatRef>();
-        GravitySpeed.Name = "FallSpeed";
+        GravitySpeed.Name = "Gravity";
         GravitySpeed.Value = startGravitySpeed;
         floatList.Add(GravitySpeed);
     }
@@ -45,6 +52,6 @@ public class SwapStatsPlayer : SwapStats
     // Update is called once per frame
     void Update()
     {
-
+        transform.localScale = new Vector3(ScaleRef.Value, ScaleRef.Value, ScaleRef.Value);
     }
 }

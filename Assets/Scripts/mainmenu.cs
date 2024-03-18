@@ -7,16 +7,21 @@ public class mainmenu : MonoBehaviour
 {
     public void loadlvl1()
     {
-        SceneManager.LoadScene("level1");
+        SceneManager.LoadScene("level0");
     }
     
     public void loadlvl2()
     {
-        SceneManager.LoadScene("level2");
+        SceneManager.LoadScene("level1.1");
     }
     
     public void loadlvl3()
     {
-        SceneManager.LoadScene("level3");
+        SceneManager.LoadScene("level1.2");
+    }
+
+    public void loadlvl4()
+    {
+        SceneManager.LoadScene("level1.3");
     }
 }

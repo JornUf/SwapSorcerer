@@ -12,6 +12,8 @@ public class SwapStatsCube : SwapStats
     
     public FloatRef refGravity;
 
+    [SerializeField] private bool started = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +31,13 @@ public class SwapStatsCube : SwapStats
     
     void FixedUpdate()
     {
-        rb.AddForce(new Vector3(0, -1.0f, 0)*rb.mass*refGravity.Value);  
+        if(started)
+            rb.AddForce(new Vector3(0, -1.0f, 0)*rb.mass*refGravity.Value);  
+    }
+
+    public void startgame()
+    {
+        started = true;
     }
     
 

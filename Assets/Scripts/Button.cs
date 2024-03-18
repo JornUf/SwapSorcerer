@@ -42,6 +42,16 @@ public class Button : MonoBehaviour
 
                 down.Invoke();
             }
+            else if(isPressed && (other.gameObject.GetComponent<SwapStatsCube>().refGravity.Value < neededweight))
+            {
+                isPressed = false;
+                if (!vertical)
+                {
+                    transform.position = startPos;
+                }
+
+                up.Invoke();
+            }
         }
     }
     

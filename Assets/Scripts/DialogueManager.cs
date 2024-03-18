@@ -140,6 +140,7 @@ public class DialogueManager : MonoBehaviour
 
     public void finishdia()
     {
+        speed *= 2;
         dialoguect = 0;
         _currentdialogue = currentdialogue.finisheddialogue;
         movein = true;

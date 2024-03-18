@@ -30,9 +30,12 @@ public class Swapmanager : MonoBehaviour
         {
             swaps.swapmanager = this;
             swaps.confirmbutton = button;
-            var tempparticles = Instantiate(particles);
-            tempparticles.transform.position = swaps.gameObject.transform.position;
-            tempparticles.transform.parent = swaps.gameObject.transform;
+            if (swaps.SwapStat)
+            {
+                var tempparticles = Instantiate(particles);
+                tempparticles.transform.position = swaps.gameObject.transform.position;
+                tempparticles.transform.parent = swaps.gameObject.transform;
+            }
         }
     }
 

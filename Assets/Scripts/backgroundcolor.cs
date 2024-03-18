@@ -7,6 +7,7 @@ public class backgroundcolor : MonoBehaviour
     private Camera _camera;
 
     [SerializeField] private float shiftSpeed = 0.2f;
+    [SerializeField] private SpriteRenderer cheesebg;
     private float red = 1.0f;
     private float green = 0.0f;
     private float blue = 0.0f;
@@ -58,6 +59,11 @@ public class backgroundcolor : MonoBehaviour
             }
         }
 
-        _camera.backgroundColor = newColor;
+        if(cheesebg == null)
+            _camera.backgroundColor = newColor;
+        else
+        {
+            //cheesebg.color = newColor;
+        }
     }
 }
