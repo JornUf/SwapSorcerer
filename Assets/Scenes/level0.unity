@@ -3714,7 +3714,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 238441881958070027, guid: 90fcd4e783ec18346bba6f13f9e12d3c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.93
+      value: -8.77
       objectReference: {fileID: 0}
     - target: {fileID: 238441881958070027, guid: 90fcd4e783ec18346bba6f13f9e12d3c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3760,6 +3760,22 @@ PrefabInstance:
       propertyPath: swapmanager
       value: 
       objectReference: {fileID: 1930127395}
+    - target: {fileID: 3412961747037028915, guid: 90fcd4e783ec18346bba6f13f9e12d3c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 69e3034bd1cfe234b87db81e60a430a4, type: 2}
+    - target: {fileID: 6318053816819670439, guid: 90fcd4e783ec18346bba6f13f9e12d3c, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6318053816819670439, guid: 90fcd4e783ec18346bba6f13f9e12d3c, type: 3}
+      propertyPath: m_Constraints
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 8415791038345052961, guid: 90fcd4e783ec18346bba6f13f9e12d3c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31ce6111ea060014b942ad5670abd60f, type: 2}
     - target: {fileID: 9152281069733408181, guid: 90fcd4e783ec18346bba6f13f9e12d3c, type: 3}
       propertyPath: m_Name
       value: Cube
